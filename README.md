@@ -48,6 +48,8 @@ Compares the S&P 500 implied earnings yield (`1 / TR CAPE × 100`) against the 1
 
 All data is sourced from the [Shiller Online Data (Yale)](http://www.econ.yale.edu/~shiller/data.htm) — a single XLS file containing CAPE, TR CAPE, GS10, price, earnings, dividends, and CPI going back to 1871. It is downloaded fresh on each run.
 
+> Data provided by Robert J. Shiller. Source: *Irrational Exuberance*, Princeton University Press. [econ.yale.edu/~shiller/data.htm](http://www.econ.yale.edu/~shiller/data.htm)
+
 ---
 
 ## Project Structure
