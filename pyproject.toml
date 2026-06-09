@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "market-signals"
+version = "0.1.0"
+description = "Market valuation and macro signal analysis"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas",
+    "matplotlib",
+    "openpyxl",
+]
+
+[project.scripts]
+market-signals = "src.market_signals:main"

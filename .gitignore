@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data files (download separately from Shiller / FRED)
+data/*.xls
+data/*.xlsx
+data/*.csv
+
+# Generated output
+output/
+
+# OS
+.DS_Store
+Thumbs.db
