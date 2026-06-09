@@ -1,3 +1,4 @@
+import sys
 import tempfile
 from pathlib import Path
 
@@ -5,9 +6,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 
-from .data import download_shiller_data, load_shiller_data
-from .signals import compute_cape_momentum, compute_yield_gap
-from .charts import plot_cape_momentum, plot_yield_gap
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from market_signals.data import download_shiller_data, load_shiller_data
+from market_signals.signals import compute_cape_momentum, compute_yield_gap
+from market_signals.charts import plot_cape_momentum, plot_yield_gap
 
 st.set_page_config(page_title="Market Signals", layout="wide")
 
