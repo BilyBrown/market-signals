@@ -1,20 +1,13 @@
-from src.market_signals.data import load_shiller_data
-from src.market_signals.signals import compute_cape_momentum, compute_yield_gap
-from src.market_signals.charts import plot_cape_momentum, plot_yield_gap
-import matplotlib.pyplot as plt
+"""Development entrypoint. Run from the repo root: python main.py
 
-DATA_PATH = "data/ie_data.xls"
+For the installed CLI command after `pip install .`, use: market-signals
+"""
+import sys
+from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-def main():
-    df = load_shiller_data(DATA_PATH)
-    df = compute_cape_momentum(df)
-    df = compute_yield_gap(df)
-
-    plot_cape_momentum(df)
-    plot_yield_gap(df)
-    plt.show()
-
+from market_signals.cli import main
 
 if __name__ == "__main__":
     main()

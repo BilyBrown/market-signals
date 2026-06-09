@@ -14,5 +14,8 @@ dependencies = [
     "openpyxl",
 ]
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [project.scripts]
-market-signals = "src.market_signals:main"
+market-signals = "market_signals.cli:main"
