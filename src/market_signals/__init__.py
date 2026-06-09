@@ -1,8 +1,9 @@
-from .data import load_shiller_data
+from .data import download_shiller_data, load_shiller_data
 from .signals import compute_cape_momentum, compute_yield_gap
 from .charts import plot_cape_momentum, plot_yield_gap
 
 __all__ = [
+    "download_shiller_data",
     "load_shiller_data",
     "compute_cape_momentum",
     "compute_yield_gap",

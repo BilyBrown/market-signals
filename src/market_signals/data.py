@@ -1,4 +1,23 @@
+import urllib.request
+from pathlib import Path
+
 import pandas as pd
+
+SHILLER_URL = (
+    "https://img1.wsimg.com/blobby/go/e5e77e0b-59d1-44d9-ab25-4763ac982e53"
+    "/downloads/c9b8cf0f-f01a-49f5-9ea5-d19443390ab2/ie_data.xls?ver=1780495520681"
+)
+
+
+def download_shiller_data(dest: str = "data/ie_data.xls", url: str = SHILLER_URL) -> None:
+    """Download the latest Shiller ie_data.xls to dest.
+
+    Args:
+        dest: Local path to save the file. Parent directory is created if needed.
+        url: Direct download URL. Defaults to the current Shiller data host.
+    """
+    Path(dest).parent.mkdir(parents=True, exist_ok=True)
+    urllib.request.urlretrieve(url, dest)
 
 
 def load_shiller_data(path: str, start_year: str = "1950") -> pd.DataFrame:

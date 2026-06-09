@@ -20,9 +20,20 @@ Same analysis structure but uses two separate flat files (`stock_shiller-pe.xlsx
 
 ---
 
+## Usage
+
+```bash
+pip install .
+market-signals
+```
+
+Data is downloaded automatically on each run — no manual setup required.
+
+---
+
 ## Data Sources
 
-All data comes from a single source: the [Shiller Online Data (Yale)](http://www.econ.yale.edu/~shiller/data.htm) — `ie_data.xls`. This file contains CAPE, TR CAPE, GS10, price, earnings, dividends, and CPI going back to 1871.
+All data comes from a single source: the [Shiller Online Data (Yale)](http://www.econ.yale.edu/~shiller/data.htm) — `ie_data.xls`. This file contains CAPE, TR CAPE, GS10, price, earnings, dividends, and CPI going back to 1871. It is fetched fresh each run so results always reflect the latest published data.
 
 ---
 
@@ -42,7 +53,7 @@ Stocks are yielding roughly half what 10-year Treasuries pay on an earnings basi
 
 ## Roadmap
 
-- [ ] Automate data refresh via FRED API and Shiller's published XLS
+- [x] Automate data refresh from Shiller's published XLS
 - [ ] Build a Streamlit dashboard to replace notebook execution
 - [ ] Add credit spread signal (HY OAS)
 - [ ] Add Fed Funds rate overlay

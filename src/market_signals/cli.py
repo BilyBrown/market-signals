@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-from .data import load_shiller_data
+from .data import download_shiller_data, load_shiller_data
 from .signals import compute_cape_momentum, compute_yield_gap
 from .charts import plot_cape_momentum, plot_yield_gap
 
@@ -11,11 +11,8 @@ OUTPUT_PATH = Path("output")
 
 
 def main():
-    if not DATA_PATH.exists():
-        print(f"Error: data file not found at {DATA_PATH}")
-        print("Download ie_data.xls from http://www.econ.yale.edu/~shiller/data.htm")
-        print("and place it in the data/ directory.")
-        sys.exit(1)
+    print("Downloading latest Shiller data...")
+    download_shiller_data(str(DATA_PATH))
 
     print("Loading data...")
     df = load_shiller_data(str(DATA_PATH))
