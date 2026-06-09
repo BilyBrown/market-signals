@@ -16,16 +16,13 @@ Loads the full [Shiller dataset](http://www.econ.yale.edu/~shiller/data.htm) dir
 3. **Stocks vs. Bonds: Yield Gap** — Converts TR CAPE to an implied earnings yield (`1/CAPE × 100`) and compares it against the embedded 10-Year Treasury rate (GS10). The yield gap (`earnings yield − bond yield`) is Z-scored against a rolling 10-year window. A Z-score below −2 flags periods where bonds are historically expensive relative to equities.
 
 ### `market_play.ipynb` *(earlier version)*
-Same analysis structure but uses two separate flat files (`stock_shiller-pe.xlsx` and `GS10.csv`) and standard CAPE rather than TR CAPE. Covers data back to 1871.
+Same analysis structure but uses two separate flat files (`stock_shiller-pe.xlsx` and `GS10.csv`) and standard CAPE rather than TR CAPE. Covers data back to 1871. Note: the GS10 series loaded from `GS10.csv` is redundant — it is already embedded in the Shiller dataset as `Rate GS10`.
 
 ---
 
 ## Data Sources
 
-| Series | Source |
-|---|---|
-| Shiller CAPE / TR CAPE / GS10 | [Shiller Online Data (Yale)](http://www.econ.yale.edu/~shiller/data.htm) — `ie_data.xls` |
-| 10-Year Treasury Yield (standalone) | [FRED GS10](https://fred.stlouisfed.org/series/GS10) |
+All data comes from a single source: the [Shiller Online Data (Yale)](http://www.econ.yale.edu/~shiller/data.htm) — `ie_data.xls`. This file contains CAPE, TR CAPE, GS10, price, earnings, dividends, and CPI going back to 1871.
 
 ---
 
