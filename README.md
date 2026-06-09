@@ -1,70 +1,83 @@
 # market-signals
 
-A collection of Python notebooks for analyzing equity market valuation and macroeconomic signals. The goal is to build this out into a runnable reporting tool that surfaces key market regime indicators.
+A Python package for analyzing equity market valuation and macroeconomic signals. Run it from the command line to generate charts on the current state of the market — data is downloaded automatically on each run.
 
 ---
 
-## Current Notebooks
+## Installation
 
-### `market_play_v2.ipynb` *(primary)*
-Loads the full [Shiller dataset](http://www.econ.yale.edu/~shiller/data.htm) directly and runs three analyses:
-
-1. **CAPE Level** — Plots the Total Return CAPE ratio (1950–present) against ±1 standard deviation bands from the historical mean (~17.4).
-
-2. **CAPE Momentum Signal** — Computes the 12-month rate of change of TR CAPE, Z-scores it against a rolling 10-year window, and smooths the signal over 3 months. Periods where the Z-score exceeds ±2 are highlighted on the CAPE chart as overheating (red) or deep value (green) regimes.
-
-3. **Stocks vs. Bonds: Yield Gap** — Converts TR CAPE to an implied earnings yield (`1/CAPE × 100`) and compares it against the embedded 10-Year Treasury rate (GS10). The yield gap (`earnings yield − bond yield`) is Z-scored against a rolling 10-year window. A Z-score below −2 flags periods where bonds are historically expensive relative to equities.
-
-### `market_play.ipynb` *(earlier version)*
-Same analysis structure but uses two separate flat files (`stock_shiller-pe.xlsx` and `GS10.csv`) and standard CAPE rather than TR CAPE. Covers data back to 1871. Note: the GS10 series loaded from `GS10.csv` is redundant — it is already embedded in the Shiller dataset as `Rate GS10`.
-
----
+```bash
+git clone https://github.com/BilyBrown/market-signals.git
+cd market-signals
+pip install .
+```
 
 ## Usage
 
 ```bash
-pip install .
 market-signals
 ```
 
-Data is downloaded automatically on each run — no manual setup required.
+That's it. The tool fetches the latest Shiller dataset, computes signals, saves two charts to `output/`, and displays them.
+
+To run without installing (from the repo root):
+
+```bash
+python main.py
+```
 
 ---
 
-## Data Sources
+## What It Produces
 
-All data comes from a single source: the [Shiller Online Data (Yale)](http://www.econ.yale.edu/~shiller/data.htm) — `ie_data.xls`. This file contains CAPE, TR CAPE, GS10, price, earnings, dividends, and CPI going back to 1871. It is fetched fresh each run so results always reflect the latest published data.
+### Chart 1 — TR CAPE Momentum
+Tracks the S&P 500 Total Return CAPE ratio (1950–present) alongside a rolling Z-score of its 12-month rate of change, smoothed over 3 months.
+
+- **Red shading** on the CAPE panel: momentum Z-score > +2 — valuation is rising at a historically abnormal pace
+- **Green shading**: Z-score < −2 — CAPE is falling sharply relative to its recent history
+
+### Chart 2 — Stocks vs. Bonds: The Battle for Yield
+Compares the S&P 500 implied earnings yield (`1 / TR CAPE × 100`) against the 10-Year Treasury yield (GS10), with a rolling Z-score of the gap between them.
+
+- A **negative yield gap** means bonds are paying more than the equity earnings yield
+- **Red shading** on the yield panel: gap Z-score < −2 — stocks are historically expensive relative to bonds
 
 ---
 
-## Current Signal (as of May 2026)
+## Data
 
-| Metric | Value |
-|---|---|
-| TR CAPE | ~42 |
-| S&P 500 Earnings Yield | ~2.4% |
-| 10-Year Treasury Yield | ~4.45% |
-| Yield Gap | −2.08% |
-| Yield Gap Z-Score (10yr rolling) | −1.65 |
+All data is sourced from the [Shiller Online Data (Yale)](http://www.econ.yale.edu/~shiller/data.htm) — a single XLS file containing CAPE, TR CAPE, GS10, price, earnings, dividends, and CPI going back to 1871. It is downloaded fresh on each run.
 
-Stocks are yielding roughly half what 10-year Treasuries pay on an earnings basis. The yield gap Z-score is approaching but has not yet crossed the −2 threshold that historically marks the most stretched stock-vs-bond regimes.
+---
+
+## Project Structure
+
+```
+market-signals/
+├── notebooks/              # original exploratory notebooks
+├── src/market_signals/
+│   ├── data.py             # download and parse Shiller data
+│   ├── signals.py          # CAPE momentum and yield gap calculations
+│   ├── charts.py           # chart generation
+│   └── cli.py              # command-line entrypoint
+├── output/                 # generated charts (gitignored)
+└── main.py                 # dev entrypoint (python main.py)
+```
 
 ---
 
 ## Roadmap
 
-- [x] Automate data refresh from Shiller's published XLS
-- [ ] Build a Streamlit dashboard to replace notebook execution
-- [ ] Add credit spread signal (HY OAS)
-- [ ] Add Fed Funds rate overlay
+- [x] CAPE momentum signal with rolling Z-score
+- [x] Stocks vs. bonds yield gap with rolling Z-score
+- [x] Automated data refresh from Shiller's published XLS
+- [ ] Streamlit dashboard
+- [ ] Credit spread signal (HY OAS)
+- [ ] Fed Funds rate overlay
 - [ ] Equity risk premium model
 
 ---
 
 ## Requirements
 
-```
-pandas
-matplotlib
-openpyxl
-```
+Python 3.9+, pandas, matplotlib, openpyxl
