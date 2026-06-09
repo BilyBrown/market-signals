@@ -12,6 +12,7 @@ dependencies = [
     "pandas",
     "matplotlib",
     "openpyxl",
+    "streamlit",
 ]
 
 [tool.setuptools.packages.find]
@@ -19,3 +20,4 @@ where = ["src"]
 
 [project.scripts]
 market-signals = "market_signals.cli:main"
+market-signals-dashboard = "market_signals.dashboard_runner:main"

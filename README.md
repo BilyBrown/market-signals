@@ -14,14 +14,19 @@ pip install .
 
 ## Usage
 
+**Dashboard** (recommended)
+```bash
+market-signals-dashboard
+```
+Opens a Streamlit dashboard in your browser with current metrics and charts. Data refreshes automatically every hour.
+
+**Command line**
 ```bash
 market-signals
 ```
-
-That's it. The tool fetches the latest Shiller dataset, computes signals, saves two charts to `output/`, and displays them.
+Fetches the latest data, saves two charts to `output/`, and displays them.
 
 To run without installing (from the repo root):
-
 ```bash
 python main.py
 ```
@@ -73,7 +78,7 @@ market-signals/
 - [x] CAPE momentum signal with rolling Z-score
 - [x] Stocks vs. bonds yield gap with rolling Z-score
 - [x] Automated data refresh from Shiller's published XLS
-- [ ] Streamlit dashboard
+- [x] Streamlit dashboard
 - [ ] Credit spread signal (HY OAS)
 - [ ] Fed Funds rate overlay
 - [ ] Equity risk premium model
