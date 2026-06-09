@@ -77,3 +77,6 @@ def main():
         "Data: Robert J. Shiller, *Irrational Exuberance*, Princeton University Press. "
         "[econ.yale.edu/~shiller/data.htm](http://www.econ.yale.edu/~shiller/data.htm)"
     )
+
+
+main()
